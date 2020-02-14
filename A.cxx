@@ -3,31 +3,28 @@
 //
 A::A (int id){
   name = id;
+  t->callOnTimeout(this, &A::processList);
+}
+
+void A::timing(){
+  std::cout<<thread()<<std::endl;
+    t->start();
+  
 }
 
 void A::processList(){
-  int i = 0;
-  int q = 0;
-  while(running){
-    q++;
-    if( i < list.size() and !list.isEmpty() ){
-      //doing something that should not block main.cxx
-      i++;
-      if( i == list.size() ){
-	//end of list, reset list index
-	i = 0;
-      }
-    }
-    if( !buffer.isEmpty() ){
-      list.append(buffer);
-      std::cout<<"Now list size is: "<<list.size()<<" and was added at step "<<q<<std::endl;
-      buffer.clear();
-      std::cout<<"after cleaning buffer, buffer size is:"<<buffer.size()<<std::endl;
-    }
+  std::cout<<"in processList"<<std::endl;
+  if( !buffer.isEmpty() ){
+    list.append(buffer);
+    std::cout<<"Now list size is: "<<list.size()<<std::endl;
+    buffer.clear();
+    std::cout<<"after cleaning buffer, buffer size is:"<<buffer.size()<<std::endl;
   }
+  timing();
 }
 
 void A::makeUpdate( int update ){
   std::cout<<"Updating..."<<std::endl;
+  std::cout<<thread()<<std::endl;
   buffer.append(update);
 }

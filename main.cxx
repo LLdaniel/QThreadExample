@@ -15,14 +15,16 @@ int main(int argc , char *argv[]){
   QThread* thread = new QThread;
   a.moveToThread(thread); // change thread affinity
   bool check1, check2;
-  check1 = QObject::connect(thread, &QThread::started, &a, &A::processList, Qt::QueuedConnection);
-  check2 = QObject::connect(&b, &B::updater , &a, &A::makeUpdate, Qt::QueuedConnection);
+  check1 = QObject::connect(thread, &QThread::started, &a, &A::timing);
+  check2 = QObject::connect(&b, &B::updater , &a, &A::makeUpdate);
   std::cout<<"successful connection?: check1= "<<check1<<" and check2= "<<check2<<std::endl;
 
   //starting thread
   thread->start();
   
   //now: give an update from B to A:
-  emit b.updater(42); // --> currently not working, why?
+  emit b.updater(42); // --> now it`s working
+  for(int i = 0; i < 123; i++) std::cout<<"here in main with i = "<<i<<std::endl;
+  emit b.updater(1001);// --> and again...
   return app.exec();
 }
