@@ -1,0 +1,18 @@
+# emacs
+*~
+\#*
+.\#*
+
+
+# qt
+.qt
+
+# cmake
+CMakeCache.txt
+CMakeFiles
+QThreadExample_autogen
+cmake_install.cmake
+Makefile
+
+# binaries
+QThreadExample
