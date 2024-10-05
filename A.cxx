@@ -7,24 +7,22 @@ A::A (int id){
 }
 
 void A::timing(){
-  std::cout<<thread()<<std::endl;
-    t->start();
+  t->start();
   
 }
 
 void A::processList(){
-  std::cout<<"in processList"<<std::endl;
   if( !buffer.isEmpty() ){
     list.append(buffer);
-    std::cout<<"Now list size is: "<<list.size()<<std::endl;
+    std::cout<<"Now list size in second thread is: "<<list.size()<<std::endl;
     buffer.clear();
-    std::cout<<"after cleaning buffer, buffer size is:"<<buffer.size()<<std::endl;
+    std::cout<<"After cleaning buffer in second thread, buffer size is:"<<buffer.size()<<std::endl;
   }
   timing();
 }
 
 void A::makeUpdate( int update ){
-  std::cout<<"Updating..."<<std::endl;
-  std::cout<<thread()<<std::endl;
+  std::cout<<"Updating list in second QThread..."<<std::endl;
+  std::cout<<"Second QThread is: "<<thread()<<std::endl;
   buffer.append(update);
 }
